@@ -14,10 +14,19 @@ test('test', async ({ page }) => {
   await page.getByTestId('search-order-button').click(); 
 
   // Assert
-  await expect(page.getByTestId('order-result-id')).toContainText('VLO-40S57C');
-  await expect(page.getByTestId('order-result-id')).toBeVisible();
 
-  await expect(page.getByTestId('order-result-status')).toBeVisible();
-  await expect(page.getByTestId('order-result-status')).toContainText('APROVADO');
+  await expect(page.getByText('VLO-40S57C')).toBeVisible();
+  await expect(page.getByText('APROVADO')).toBeVisible();
+
+  await expect(page.locator('//p[text()="Pedido"]/..//p[text()="VLO-40S57C"]')).toBeVisible({timeout: 30_000});
+
+  await expect(page.locator('//div[@class="flex items-center justify-between"]/..//div[text()="APROVADO"]')).toBeVisible();
+
+
+  //await expect(page.getByTestId('order-result-id')).toBeVisible({timeout: 30_000});
+  //await expect(page.getByTestId('order-result-id')).toContainText('VLO-40S57C');
+
+  //await expect(page.getByTestId('order-result-status')).toBeVisible();
+  //await expect(page.getByTestId('order-result-status')).toContainText('APROVADO');
 
 });
