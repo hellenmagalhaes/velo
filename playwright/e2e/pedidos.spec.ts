@@ -39,6 +39,35 @@ test.describe('Consulta de Pedido', async () => {
 
     await expect(page.locator('//div[@class="flex items-center justify-between"]/..//div[text()="APROVADO"]')).toBeVisible();
 
+    await expect(page.getByTestId(`order-result-${order}`)).toMatchAriaSnapshot(`
+      - img
+      - paragraph: Pedido
+      - paragraph: ${order}
+      - img
+      - text: APROVADO
+      - img "Velô Sprint"
+      - paragraph: Modelo
+      - paragraph: Velô Sprint
+      - paragraph: Cor
+      - paragraph: Midnight Black
+      - paragraph: Interior
+      - paragraph: cream
+      - paragraph: Rodas
+      - paragraph: sport Wheels
+      - heading "Dados do Cliente" [level=4]
+      - paragraph: Nome
+      - paragraph: Hellen Magalhães
+      - paragraph: Email
+      - paragraph: hellen_magalhaes@velo.dev
+      - paragraph: Loja de Retirada
+      - paragraph
+      - paragraph: Data do Pedido
+      - paragraph: /\\d+\\/\\d+\\/\\d+/
+      - heading "Pagamento" [level=4]
+      - paragraph: À Vista
+      - paragraph: /R\\$ \\d+\\.\\d+,\\d+/
+      `);
+
 
 
     //await expect(page.getByTestId('order-result-id')).toBeVisible({timeout: 30_000});
